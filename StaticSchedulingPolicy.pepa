@@ -1,0 +1,52 @@
+/* Rate declarations */
+r_arrive_b = 400.0;
+r_arrive_x = 400.0;
+r_arrive_bx = 400.0;
+
+r_register = 2000.0;
+r_wait = 2000.0;
+
+r_blood = 120.0;
+r_xray = 80.0;
+r_db = 1.0;
+r_dx = 1.0;
+
+/* Definition of a Patient blood-only */
+PatientB = (arriveB, r_arrive_b).PatientB1;
+PatientB1 = (register, r_register).PatientB2;
+PatientB2 = (blood, r_blood).PatientB3;
+PatientB3 = (wait, r_wait).PatientB;
+
+/* Definition of a Patient xray-only */
+PatientX = (arriveB, r_arrive_x).PatientX1;
+PatientX1 = (register, r_register).PatientX2;
+PatientX2 = (blood, r_blood).PatientX3;
+PatientX3 = (wait, r_wait).PatientX;
+
+/* Definition of a Patient blood and xray */
+PatientBX = (arriveBX, r_arrive_bx).PatientBX1;
+PatientBX1 = (register, r_register).PatientBX2;
+PatientBX2 = (decideB, T).PatientBX3 + (decideX, T).PatientBX4;
+PatientBX3 = (blood, r_blood).PatientBX5;
+PatientBX5 = (xray, r_xray).PatientBX6;
+PatientBX6 = (wait, r_wait).PatientBX;
+PatientBX4 = (xray, r_xray).PatientBX7;
+PatientBX7 = (blood, r_blood).PatientBX8;
+PatientBX8 = (wait, r_wait).PatientBX;
+
+/* Definitions of Departments Models */
+Blood = (blood, r_blood).Blood;
+Xray = (xray, r_xray).Xray;
+Reception = (register, r_register).Reception;
+
+/* Definitions of Patient Decisions */
+DecideB = (decideB, r_db).DecideB;
+DecideX = (decideX, r_dx).DecideX;
+
+/* Definition of Wait */
+Wait = (wait, r_wait).Wait;
+
+
+/* System equation */
+(PatientB[4] || PatientX[4] || PatientBX[4]) <register, blood, xray, decideB, decideX, wait> (Blood || Xray || Reception || DecideB || DecideX || Wait)
+
