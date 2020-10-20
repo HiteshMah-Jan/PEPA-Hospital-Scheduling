@@ -1,0 +1,46 @@
+/* DRE-i Server and Client */
+/* Rate declarations */
+r_voteCryptogramsReq = 0.00114;
+r_signTranscriptReq = 0.00082;
+r_castedVoteMSG = 0.00087;
+r_verifiedVoteMSG = 0.00087;
+r_selectVote = 0.0002;
+r_castReply = 0.0002;
+r_verifyReply = 0.0002;
+r_reselect = 0.0002;
+r_voteCastingComplete = 0.002;
+r_endVoting = 0.002; //review this
+r_voteVerificationComplete = 0.002;
+r_reselectOrEndVoting = 0.002;
+r_wait = 0.0000519585;
+r_voteCryptogramsReply = 0.00114;
+r_signTranscriptReply = 0.00082;
+r_castedVoteAck = 0.00087;
+r_verifiedVoteAck = 0.00087;
+
+/* Definitions (DRE-i Client) */
+DRE_Client0 = (voteCryptogramsReq, r_voteCryptogramsReq ).DRE_Client1;
+DRE_Client1 = (voteCryptogramsReply,r_voteCryptogramsReply).DRE_Client2;
+DRE_Client2 = (selectVote,r_selectVote ).DRE_Client3;
+DRE_Client3 = (signTranscriptReq,r_signTranscriptReq).DRE_Client4;
+DRE_Client4 = (signTranscriptReply,r_signTranscriptReply).DRE_Client5;
+DRE_Client5 = (castReply,r_castReply).DRE_Client6 + (verifyReply,r_verifyReply).DRE_Client7;
+DRE_Client6 = (castedVoteMSG,r_castedVoteMSG ).DRE_Client8;
+DRE_Client8 = (castedVoteAck,r_castedVoteAck ).(voteCastingComplete,r_voteCastingComplete ).(wait,r_wait ).DRE_Client0;
+DRE_Client7 = (verifiedVoteMSG,r_verifiedVoteMSG ).DRE_Client9;
+DRE_Client9 = (verifiedVoteAck,r_verifiedVoteAck).(voteVerificationComplete,r_voteVerificationComplete).DRE_Client10;
+DRE_Client10 = (reselectOrEndVoting,r_reselectOrEndVoting ).DRE_Client11;
+DRE_Client11 = (reselect,r_reselect).DRE_Client0 + (endVoting,r_endVoting ).(wait,r_wait ).DRE_Client0;
+
+/* Definitions (DRE-i Server) */
+DRE_SRV0 = (voteCryptogramsReply,r_voteCryptogramsReply ).DRE_SRV0 +
+(signTranscriptReply,r_signTranscriptReply ).DRE_SRV0 +
+(castedVoteAck,r_castedVoteAck).DRE_SRV0 + (verifiedVoteAck,r_verifiedVoteAck).DRE_SRV0;
+
+/* System equation */
+/* 10 DRE-i Clients, 1 DRE_SRV */
+DRE_Client0[5] <voteCryptogramsReply,signTranscriptReply, castedVoteAck,verifiedVoteAck> DRE_SRV0[1]
+
+
+
+

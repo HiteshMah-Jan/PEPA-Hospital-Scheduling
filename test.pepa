@@ -1,0 +1,13 @@
+/* Rate declarations */
+r = 1.0;
+s = 4.5;
+t = 5.5;
+/* Sequential component Process */
+Process1 = (use, r).Process2;
+Process2 = (think, s).Process1;
+/* Sequential component CPU */
+CPU1 = (use, r).CPU2;
+CPU2 = (reset, t).CPU1;
+
+/* System equation */
+Process1[8] <use> CPU1[4]
