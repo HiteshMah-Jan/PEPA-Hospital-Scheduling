@@ -20,7 +20,7 @@ PatientB3 = (wait, r_wait).PatientB;
 /* Definition of a Patient xray-only */
 PatientX = (arriveB, r_arrive_x).PatientX1;
 PatientX1 = (register, r_register).PatientX2;
-PatientX2 = (blood, r_blood).PatientX3;
+PatientX2 = (xray, r_xray).PatientX3;
 PatientX3 = (wait, r_wait).PatientX;
 
 /* Definition of a Patient blood and xray */
@@ -46,7 +46,8 @@ DecideX = (decideX, r_dx).DecideX;
 /* Definition of Wait */
 Wait = (wait, r_wait).Wait;
 
-
 /* System equation */
-(PatientB[4] || PatientX[4] || PatientBX[4]) <register, blood, xray, decideB, decideX, wait> (Blood || Xray || Reception || DecideB || DecideX || Wait)
+(PatientB[4] || PatientX[4] || PatientBX[4]) 
+<register, blood, xray, decideB, decideX, wait> 
+(Blood || Xray || Reception || DecideB || DecideX || Wait)
 
