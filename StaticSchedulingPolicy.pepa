@@ -47,7 +47,7 @@ DecideX = (decideX, r_dx).DecideX;
 Wait = (wait, r_wait).Wait;
 
 /* System equation */
-(PatientB[4] || PatientX[4] || PatientBX[4]) 
+PatientB[50] || PatientX[50] || PatientBX[100]
 <register, blood, xray, decideB, decideX, wait> 
-(Blood || Xray || Reception || DecideB || DecideX || Wait)
+Blood || Xray || Reception || DecideB || DecideX || Wait
 
