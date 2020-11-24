@@ -1,0 +1,35 @@
+/* Rate declarations */
+r_arrive_b = 400.0;
+r_arrive_x = 400.0;
+
+r_register = 2000.0;
+r_wait = 2000.0;
+
+r_blood = 120.0;
+r_xray = 80.0;
+
+/* Definition of a Patient blood-only */
+PatientB = (arriveB, r_arrive_b).PatientB1;
+PatientB1 = (register, r_register).PatientB2;
+PatientB2 = (blood, r_blood).PatientB3;
+PatientB3 = (wait, r_wait).PatientB;
+
+/* Definition of a Patient xray-only */
+PatientX = (arriveX, r_arrive_x).PatientX1;
+PatientX1 = (register, r_register).PatientX2;
+PatientX2 = (xray, r_xray).PatientX3;
+PatientX3 = (wait, r_wait).PatientX;
+
+/* Definitions of Departments Models */
+Blood = (blood, r_blood).Blood;
+Xray = (xray, r_xray).Xray;
+Reception = (register, r_register).Reception;
+
+/* Definition of Wait */
+Wait = (wait, r_wait).Wait;
+
+/* System equation */
+(PatientB[1] || PatientX[1])
+<register, blood, xray, wait> 
+(Blood || Xray || Reception || Wait)
+
