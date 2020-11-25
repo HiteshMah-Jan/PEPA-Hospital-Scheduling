@@ -29,7 +29,7 @@ Reception = (register, r_register).Reception;
 Wait = (wait, r_wait).Wait;
 
 /* System equation */
-(PatientB[1] || PatientX[1])
+(PatientB[4] || PatientX[4])
 <register, blood, xray, wait> 
 (Blood || Xray || Reception || Wait)
 
