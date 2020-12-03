@@ -1,0 +1,26 @@
+/* Rate declarations */
+r_arrive_b = 400.0;
+
+r_register = 2000.0;
+r_wait = 2000.0;
+
+r_blood = 120.0;
+
+/* Definition of a Patient blood-only */
+PatientB = (arriveB, r_arrive_b).PatientB1;
+PatientB1 = (register, r_register).PatientB2;
+PatientB2 = (blood, r_blood).PatientB3;
+PatientB3 = (wait, r_wait).PatientB;
+
+/* Definitions of Departments Models */
+Blood = (blood, r_blood).Blood;
+Reception = (register, r_register).Reception;
+
+/* Definition of Wait */
+Wait = (wait, r_wait).Wait;
+
+/* System equation */
+(PatientB[1])
+<register, blood, wait> 
+(Blood || Reception || Wait)
+
