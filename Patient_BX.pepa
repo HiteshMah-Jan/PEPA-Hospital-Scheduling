@@ -1,6 +1,4 @@
 /* Rate declarations */
-r_arrive_b = 400.0;
-r_arrive_x = 400.0;
 r_arrive_bx = 400.0;
 
 r_register = 2000.0;
